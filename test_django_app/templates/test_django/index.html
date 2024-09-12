@@ -1,0 +1,40 @@
+<!--Implementing DRY pattern (repeated html chunks)-->
+
+{% extends 'test_django/base.html' %}
+
+{% block body %}
+<body>
+    <div class="header">
+        <a class="button" href="{% url 'test_env:test_stub' %}">Ссылка 1</a>
+        <a class="button" href="{% url 'test_env:test_stub' %}">Ссылка 2</a>
+        <a class="button" href="{% url 'test_env:test_stub' %}">Ссылка 3</a>
+    </div>
+    <h1>Записи на услуги</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Имя</th>
+                <th>Услуга</th>
+                <th>Дата и время</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in records %}
+                <tr>
+                    <td>{{record.customer_id}}</td>
+                    <td>{% if 'BEST' in record.service_type %}
+                            <b>{{record.service_type}}</b>
+                        {% else %}
+                            {{record.service_type}}
+                        {% endif %}</td>
+                    <td>{{record.date}}</td>
+                    <td><img src="{{record.customer_id.profile_pic.url}}"></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

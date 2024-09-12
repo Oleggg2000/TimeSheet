@@ -1,0 +1,16 @@
+<!--That page was create for training purpose. Just to test templates engine DjangoTemplates and static files loading-->
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link href="{% static 'test_django/test_django.css' %}" rel="stylesheet"/>
+</head>
+{% block body %}{% endblock %}
+{% block footer %}{% endblock %}
+</html>

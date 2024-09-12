@@ -1,0 +1,4 @@
+.idea
+TimeSheet/__pycache__
+test_django_app/__pycache__
+test_django_app/migrations/__pycache__
