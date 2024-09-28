@@ -22,10 +22,11 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path("api/", include('api.urls')),
+    path("api/", include('rest_api.urls', namespace='api')),
+    path('auth/', include('auth_service.urls', namespace='auth_env')),
 
 
-    path("test/", include('test_django_app.urls', namespace='test_env')),
+    path("test/", include('test_django_app.urls', namespace='test_env'), name='test_env'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

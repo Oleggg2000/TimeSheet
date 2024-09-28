@@ -1,0 +1,42 @@
+<!--Login in page-->
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+</head>
+<body>
+    <div class="login-container">
+        {% if messages or form.non_field_errors %}
+            {% if form.non_field_errors %}
+                <div class="error-message" id="error-message">{{ form.errors }}</div>
+            {% else %}
+                {% for message in messages %}
+                    {% if message.tags == 'success' %}
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">{{ message }}</div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        {% endif %}
+        <div class="login-box">
+            <h2>Login</h2>
+            <form action="{% url 'auth_env:login' %}" method="POST">
+                {% csrf_token %}
+                <div class="input-group">
+                    <label for="{{ form.username.id_for_label }}">Username</label>
+                    {{ form.username }}
+                </div>
+                <div class="input-group">
+                    <label for="{{ form.password.id_for_label }}">Password</label>
+                    {{ form.password }}
+                </div>
+                <button type="submit" class="btn">Sign In</button>
+            </form>
+            <p class="register-link"><a href="{% url 'auth_env:register' %}">Don't have an account?</a>
+</body>
+</html>

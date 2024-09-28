@@ -1,0 +1,47 @@
+<!--Registration page-->
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Register</title>
+    <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+</head>
+<body>
+    <div class="login-container">
+        {% if messages or form.errors %}  <!--НЕ РАБОТАЕТ ХЗ ПОЧЕМУ-->
+            {% if form.errors %}
+                <div class="error-message" id="error-message">{{ form.errors }}</div>
+            {% else %}
+                {% for message in messages %}
+                    {% if message.tags == 'success' %}
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        {% endif %}
+        <div class="login-box">
+            <h2>Register</h2>
+            <form action="{% url 'auth_env:register' %}" method="POST">
+                {% csrf_token %}
+                {% for field in form %}
+                    {% if field.id != "id_usable_password" %}
+                        <div class="input-group">
+                            <label for="{{ field.id_for_label }}">{{ field.help_text }}</label>
+                            {{ field }}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+                <button type="submit" class="btn">Sign Up</button>
+            </form>
+            <p class="register-link">Already have an account? <a href="{% url 'auth_env:login' %}">Login here</a></p>
+        </div>
+    </div>
+</body>
+</html>

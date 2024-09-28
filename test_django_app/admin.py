@@ -1,6 +1,5 @@
 from django.contrib import admin
 
-from .models import Records, Customer
+from rest_api.models import Records
 
-admin.site.register(Customer)
 admin.site.register(Records)
